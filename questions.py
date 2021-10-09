@@ -19,9 +19,17 @@ SOLUTION
 (questionfunction)
 
 Enjoy !
+
 """
 
 
+
+""" 
+PENDING REVISION
+------------------
+Q11 / 
+
+"""
 # Q1. 1. 
 # Write a program which will find all such numbers which are divisible by 7 but are not a multiple of 5, 
 # between 2000 and 3200 (both included). The numbers obtained should be printed in a comma-separated sequence on a single line.
@@ -179,9 +187,9 @@ def q9():
 # Then, the output should be: again and hello makes perfect practice world           
 
 def aux10(sentence):
-    words = sentence.split(" ").sort()
+    words = set(sentence.split(" ").sort())
     low = []
-    for word in words:
+    for word in list(words):
         low.append(word.lower)
     return ' '.join(low)
 
@@ -189,10 +197,118 @@ def q10():
     s = input()
     return aux10(s)
 
+#Q11. 2.
+# Write a program which accepts a sequence of comma separated 4 digit binary numbers as its input and then check whether they are divisible by 5 or not. T
+# The numbers that are divisible by 5 are to be printed in a comma separated sequence. Example: 0100,0011,1010,1001 Then the output should be: 1010 
+# Assume the data is input by console.
+
+# Notes: separate numbers in the input, then compute individualy if divisible by 5 and add to list. return this list in the correct format
+def aux11(nums):
+    ans = []
+    for n in nums:
+        if int(n, 2) % 5 == 0:
+            ans.append(n)
+
+    return ', '.join()
+
+
+def q11():
+    numlist = [x for x in input().split(',')]
+
+    return aux11(numlist)
     
+
+# Q12. 2. Write a program, which will find all such numbers between 1000 and 3000 (both included) such that each digit of the number is an even number. 
+# The numbers obtained should be printed in a comma-separated sequence on a single line
+
+# Notes: create empty list. iterate through numbers.  check if number has even digits. appends if true. returns correctly formatted list
+
+
+def aux12(n):
+    check = True
+    # Check all n
+    while n > 0 and check:
+        digit = n % 10
+        if digit % 2 != 0:
+            check = not check
+        else:
+            n = n // 10
+            
+
+def q12():
+    l = []
+    for i in range(1000, 3001):
+        if aux12(i):
+            l.append(str(i))
+    
+    return ', '.join(l)
+
+
+# Q13. 2. 
+# Write a program that accepts a sentence and calculate the number of letters and digits. 
+# Suppose the following input is supplied to the program: hello world! 123 Then, the output should be: LETTERS 10 DIGITS 3
+
+# Notes: set counters for letters and digits. iterate string. use isalpha and isnumeric. return counters using fsring
+
+def aux13(s):
+    letters, digits = 0, 0
+    for char in s:
+        if char.isalpha():
+            letters += 1
+        elif char.isnumeric():
+            digits += 1
+    
+    return letters, digits
+
+def q13():
+    sentence = input("Input a sentence: ")
+
+    return f'LETTERS {aux13(sentence)[0]} DIGITS {aux13(sentence)[1]}'
+
+
+# Q14. 2. 
+# Write a program that accepts a sentence and calculate the number of upper case letters and lower case letters. 
+# Suppose the following input is supplied to the program: Hello world! Then, the output should be: UPPER CASE 1 LOWER CASE 9
+
+# Notes. same structure as q14
+
+def aux14(s):
+    up, low = 0, 0
+    for char in s:
+        if char.isupper():
+            up += 1
+        elif char.islower():
+            low += 1
+
+    return up, low
+
+def q14():
+    sentence = input("Input a sentence: ")
+
+    return f'UPPER CASE {aux14(sentence)[0]} LOWER CASE {aux14(sentence)[1]}'
+
+# Q15. 2. 
+# Write a program that computes the value of a+aa+aaa+aaaa with a given digit as the value of a. 
+# Suppose the following input is supplied to the program: 9 Then, the output should be: 11106
+
+# Notes. create sum variable. compute 10*digit and add them to the sum variable and add them to the sum variable
+
+def aux15(n):
+    sumatorio = 0
+    anterior = 0
+    for i in range(4):
+        anterior += n*(10**i)
+        sumatorio += anterior
+    
+    return sumatorio
+
+def q15():
+    digit = input("Input a digit (1-9)")
+
+    return aux15(digit)
+
 """
-TESTING
+TESTING 
 
 """
 
-q1()
