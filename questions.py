@@ -22,7 +22,10 @@ Enjoy !
 
 """
 
+# MODULE IMPORTS
 
+# Q6, Q21
+import math # Use for sqrt
 
 """ 
 PENDING REVISION
@@ -103,7 +106,7 @@ class q5:
         self.s = ""
     
     def getString(self):
-        self.s = input()
+        self.s = input("Introduce una frase: ")
     
     def printString(self):
         print(self.s.upper())
@@ -118,7 +121,6 @@ q5object.printString()
 # EXAMPLE: Let us assume the following comma separated input sequence is given to the program: 100,150,180 
 # The output of the program should be: 18,22,24
 
-import math # Use for sqrt
 
 def q6():
     # Define fixed variables
@@ -307,6 +309,138 @@ def q15():
 
     return aux15(digit)
 
+# Q17. 2. 
+# Write a program that computes the net amount of a bank account based a transaction log from console input. 
+# The transaction log format is shown as following: D 100 W 200
+
+# D means deposit while W means withdrawal. Suppose the following input is supplied to the program: D 300 D 300 W 200 D 100 
+# Then, the output should be: 500
+
+# Notes: split the string by spaces. iterate through list 2 step. add/substract quanitity according
+def q17():
+    money = 0  
+    opstring = input("Write your operations: ")
+    operations = opstring.split(" ")
+
+    for i in range(0, len(operations), 2):
+        movement = operations[i]
+        quantity = int(operations[i+1])
+
+        if movement == "D": 
+            money += quantity
+        elif movement == "W":
+            money -= quantity
+        else: 
+            pass # DO NOTHING / None
+
+    return money
+        
+#Q20. 3. 
+# Define a class with a generator which can iterate the numbers, which are divisible by 7, between a given range 0 and n.
+
+# Notes: he hecho un poco de trampas, lo intentaré mejorar
+class q20:
+    def __init__(self, maximo):
+        self.maximo = maximo
+    
+    def __iter__(self):
+        self.n = 7
+        return self
+
+    def __next__(self):
+        if (self.n < self.maximo):
+            x = self.n
+            self.n += 7
+            return x
+        
+        else:
+            raise StopIteration
+
+#Q21. 3. 
+# Question A robot moves in a plane starting from the original point (0,0). 
+# The robot can move toward UP, DOWN, LEFT and RIGHT with a given steps. 
+# The trace of robot movement is shown as the following: UP 5 DOWN 3 LEFT 3 RIGHT 2 ¡­ The numbers after the direction are steps. 
+# Please write a program to compute the distance from current position after a sequence of movement and original point. 
+# If the distance is a float, then just print the nearest integer. 
+# Example: If the following tuples are given as input to the program: UP 5 DOWN 3 LEFT 3 RIGHT 2 
+# Then, the output of the program should be: 2
+
+# Notes: split instructions by space. 
+
+def q21():
+    instructionstring = input("Type instructions: ")
+    instructions = instructionstring.split(" ")
+
+    # Coordinates
+    xcoord = 0
+    ycoord = 0
+
+    # Interpret instructions
+    for instruction in range(1, len(instructions), 2):
+        movement = instructions[instruction]
+        quantity = int(instructions[instruction+1])
+
+        if movement == "UP":
+            ycoord += 1
+        elif movement == "DOWN":
+            ycoord -= 1
+        elif movement == "LEFT":
+            xcoord -= 1
+        elif movement == "RIGHT":
+            xcoord += 1
+        else: 
+            pass
+
+    return int(round(math.sqrt((xcoord**2) + (ycoord**2))))
+#Q22. 3. 
+# Write a program to compute the frequency of the words from the input. The output should output after sorting the key alphanumerically. 
+# Suppose the following input is supplied to the program: New to Python or choosing between Python 2 and Python 3? Read Python 2 or Python 3. 
+# Then, the output should be: 2:2 3.:1 3?:1 New:1 Python:5 Read:1 and:1 between:1 choosing:1 or:2 to:1
+
+# Notes. Use dictionary. USe get to return 1 if exists, +1 if it does not.
+#        To sort alphanumerically, get list of frequency, then us fprint to return in correct format
+
+def q22():
+    s = input("Type your sentence: ")
+
+    counter = {}
+    for word in s.split(" "):
+        counter[word] = counter.get(word, 0) + 1
+
+    # Create list with keys
+    wordlist = counter.keys()
+    wordlist.sort()
+
+
+    output = ""
+    # Order of words don't matter, only order of frequencies
+    for key in wordlist:
+        output += f'{key}:{counter[key]}'
+
+    return output
+
+# Q23. 1. 
+# Write a method which can calculate square value of number.
+
+# Notes. MJ deserved better
+def q23(n):
+    return n**2
+
+# Q25. 1. 
+#  Define a class, which have a class parameter and have a same instance parameter.
+
+class q25():
+    def __init__(self):
+       self.something = input("Type anything: ")
+
+#Q28. 1. 
+# Define a function that can convert a integer into a string and print it in console.
+
+def q28(n):
+    return str(n)
+
+#
+    
 """
 TESTING 
 
